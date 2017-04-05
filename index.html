@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="bulma.css">
+    <link rel="stylesheet" href="master.css">
+  </head>
+  <body>
+    <section class="section" id="tictac">
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+
+          </div>
+          <div class="column has-text-centered">
+            <h1 class="title">Tic Tac Toe</h1>
+            <div class="block">  </div>
+
+            <transition name="bounce">
+              <div class="" v-if="start">
+                <a class="button is-outlined" @click="twoPlayers">Human VS Human</a>
+                <a class="button is-outlined" @click="onePlayer">Human VS Ai</a>
+              </div>
+            </transition>
+
+            <transition name="bounce">
+              <div class="" v-if="showChoose">
+                <h4 class="subtitle">Player 1 choose your simbol</h4>
+                <a class="button  is-outlined" @click="setPlayerOne(2)">O</a>
+                <a class="button  is-outlined" @click="setPlayerOne(1)">X</a>
+              </div>
+            </transition>
+
+            <transition name="bounce">
+              <div>
+                <div class="board has-text-centered columns is-multiline is-mobile" v-if="run">
+                    <div v-for="(item, index) in board"
+                    :index="index"
+                    class="column is-4 cell"
+                    @click="setItem(index)"
+                    >{{ item }}</div>
+                </div>
+                <div class="block">  </div>
+                <div class="" v-if="twoHumans && run">
+                  Turn: {{ player[currentPlayer] }}
+                </div>
+              </div>
+            </transition>
+
+
+            <div class="resultMsg is-success" v-if="haveWinner">
+              "{{ player[currentPlayer] }}" Wins!
+            </div>
+            <div class="resultMsg is-warning" v-if="draw">
+              Draw!
+            </div>
+
+            <div class="block">  </div>
+
+            <transition name="bounce">
+              <div class="" v-if="draw || haveWinner">
+                <a class="button is-outlined" @click="continueGame">Continue</a>
+                <a class="button is-outlined" @click="newGame">New Game</a>
+              </div>
+            </transition>
+
+          </div>
+          <div class="column">
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="vue.js" charset="utf-8"></script>
+    <script src="script.js" charset="utf-8"></script>
+  </body>
+</html>
